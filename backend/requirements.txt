@@ -1,0 +1,32 @@
+# Web
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+pydantic>=2.7,<3
+pydantic-settings>=2.7,<3
+email-validator>=2.1
+
+# Auth / data
+supabase>=2.10,<3
+PyJWT[crypto]>=2.9,<3
+httpx>=0.27
+
+# PDF parsing
+pdfplumber>=0.11
+PyMuPDF>=1.24
+
+# LLM + agents
+openai>=1.50,<2
+anthropic>=0.39
+cohere>=5.11,<6
+langchain-core>=0.3,<0.4
+langchain-text-splitters>=0.3,<0.4
+langgraph>=0.2,<0.3
+tenacity>=8.5
+
+# Vector store
+pinecone>=5.4,<6
+
+# Notifications / scheduling
+resend>=2.4
+APScheduler>=3.10,<4
