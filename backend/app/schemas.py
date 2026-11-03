@@ -113,4 +113,3 @@ class EODRunRequest(BaseModel):
 class SignedUrl(BaseModel):
     url: str
     expires_in: int
-

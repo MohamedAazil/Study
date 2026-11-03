@@ -2,14 +2,13 @@
 
 import logging
 
-from supabase import Client
-
 from app.config import get_settings
 from app.db.storage import download_file
 from app.ingestion.chunking import chunk_pages
 from app.ingestion.pdf import extract_pages
 from app.ingestion.vectorstore import VectorRecord, VectorStore, get_vector_store
 from app.llm import EmbeddingProvider, get_embedding_provider
+from supabase import Client
 
 logger = logging.getLogger(__name__)
 
@@ -66,9 +65,9 @@ def ingest_document(
         records, page_count = build_records(document, pdf_bytes, embedder)
         store.delete_document(document["namespace"], doc_id)
         store.upsert(document["namespace"], records)
-        db.table("documents").update(
-            {"status": "ready", "page_count": page_count, "chunk_count": len(records)}
-        ).eq("id", doc_id).execute()
+        db.table("documents").update({"status": "ready", "page_count": page_count, "chunk_count": len(records)}).eq(
+            "id", doc_id
+        ).execute()
         logger.info("Ingested %s: %s chunks into %s", doc_id, len(records), document["namespace"])
     except Exception as exc:
         logger.exception("Ingestion failed for %s", doc_id)

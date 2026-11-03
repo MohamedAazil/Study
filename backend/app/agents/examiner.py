@@ -219,7 +219,9 @@ def build_generation_graph(deps: ExaminerDeps):
     return graph.compile()
 
 
-def generate_exam(deps: ExaminerDeps, *, student_id: str, topic: str, total_marks: int, difficulty: str) -> ExamGenState:
+def generate_exam(
+    deps: ExaminerDeps, *, student_id: str, topic: str, total_marks: int, difficulty: str
+) -> ExamGenState:
     return build_generation_graph(deps).invoke(
         {"student_id": student_id, "topic": topic, "total_marks": total_marks, "difficulty": difficulty}
     )

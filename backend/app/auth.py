@@ -8,10 +8,10 @@ from typing import Annotated
 import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from supabase import Client
 
 from app.config import Settings, get_settings
 from app.db.supabase import get_db
+from supabase import Client
 
 
 class Role(str, Enum):

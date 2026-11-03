@@ -1,6 +1,5 @@
-from supabase import Client
-
 from app.config import get_settings
+from supabase import Client
 
 
 def upload_file(db: Client, path: str, data: bytes, content_type: str) -> str:

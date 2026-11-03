@@ -5,10 +5,9 @@ import logging
 from dataclasses import dataclass, field
 from datetime import date
 
-from supabase import Client
-
 from app.config import get_settings
 from app.notifications.base import EmailMessage, Notifier
+from supabase import Client
 
 logger = logging.getLogger(__name__)
 
@@ -112,7 +111,9 @@ def run_end_of_day(db: Client, notifier: Notifier, report_date: date | None = No
                     result.in_app += 1
                 if pref.get("email_enabled", True) and parent.get("email"):
                     subject, body = render_email(name, report)
-                    notifier.send_email(EmailMessage(to=parent["email"], subject=subject, html=body, text=report["summary"]))
+                    notifier.send_email(
+                        EmailMessage(to=parent["email"], subject=subject, html=body, text=report["summary"])
+                    )
                     result.emails += 1
         except Exception as exc:  # noqa: BLE001 - one student's failure must not stop the batch
             logger.exception("EOD job failed for student %s", student["id"])

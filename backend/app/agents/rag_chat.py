@@ -9,8 +9,8 @@ from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.prompt_values import PromptValue
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.retrievers import BaseRetriever
 from langchain_core.runnables import Runnable, RunnableLambda, RunnableParallel, RunnablePassthrough
 
@@ -110,7 +110,9 @@ def build_chat_chain(llm: GenerationProvider, retriever: BaseRetriever) -> Runna
     )
     generate = RunnableLambda(lambda pv: llm.generate(_to_messages(pv), temperature=0.1))
     answer_chain = (
-        RunnableLambda(lambda x: {"context": format_context(x["docs"]), "question": x["question"], "history": x["history"]})
+        RunnableLambda(
+            lambda x: {"context": format_context(x["docs"]), "question": x["question"], "history": x["history"]}
+        )
         | prompt
         | generate
         | StrOutputParser()
@@ -119,7 +121,9 @@ def build_chat_chain(llm: GenerationProvider, retriever: BaseRetriever) -> Runna
         docs=itemgetter("question") | retriever,
         question=itemgetter("question"),
         history=itemgetter("history"),
-    ) | RunnablePassthrough.assign(answer=RunnableLambda(lambda x: answer_chain.invoke(x) if x["docs"] else NO_CONTEXT_ANSWER))
+    ) | RunnablePassthrough.assign(
+        answer=RunnableLambda(lambda x: answer_chain.invoke(x) if x["docs"] else NO_CONTEXT_ANSWER)
+    )
 
 
 def run_chat(

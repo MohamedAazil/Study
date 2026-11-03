@@ -8,9 +8,8 @@ with the anon key + user JWT (e.g. from the frontend).
 
 from functools import lru_cache
 
-from supabase import Client, create_client
-
 from app.config import get_settings
+from supabase import Client, create_client
 
 
 class SupabaseNotConfiguredError(RuntimeError):

@@ -3,12 +3,12 @@
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, status
-from supabase import Client
 
 from app.db.supabase import get_db
 from app.ingestion.vectorstore import VectorStore, get_vector_store
 from app.llm import EmbeddingProvider, GenerationProvider, get_embedding_provider, get_generation_provider
 from app.llm.base import ProviderNotConfiguredError
+from supabase import Client
 
 
 def llm_dep() -> GenerationProvider:

@@ -14,7 +14,9 @@ class OpenAIProvider:
     def __init__(self, settings: Settings):
         if not settings.openai_api_key:
             raise ProviderNotConfiguredError("OPENAI_API_KEY not set")
-        self._client = OpenAI(api_key=settings.openai_api_key, timeout=settings.llm_request_timeout_seconds, max_retries=0)
+        self._client = OpenAI(
+            api_key=settings.openai_api_key, timeout=settings.llm_request_timeout_seconds, max_retries=0
+        )
         self._chat_model = settings.openai_chat_model
         self._embedding_model = settings.openai_embedding_model
         # text-embedding-3-* support Matryoshka truncation via `dimensions`.
