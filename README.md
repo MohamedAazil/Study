@@ -138,7 +138,7 @@ The seed creates:
 - four subjects, a weekly timetable, and today's/tomorrow's tasks
 - two generated sample PDFs (a physics textbook chapter and a past paper with mark schemes), uploaded and ingested into Pinecone
 
-It is safe to re-run. The demo accounts are for local/dev projects only.
+Run it once on a fresh project: re-running reuses the accounts and subjects but adds another timetable, a second set of tasks and duplicate documents. The demo accounts are for local/dev projects only.
 
 ## End-of-day job
 
